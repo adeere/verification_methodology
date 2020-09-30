@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/static/favicon.ico">
+
+    <title>Forecast Verification - FireSmoke.ca</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/verify_bluesky.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+    crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+    crossorigin="anonymous"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script> -->
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            </head>
+    
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">FireSmoke.ca</a>
+          </div> <!-- navbar-header -->
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="">
+                <a href="/">Home</a></li>
+              <li class="dropdown active">
+                <a class="dropdown-toggle" aria-expanded="false" role="button" data-toggle="dropdown" href="#">
+                  Services <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/forecasts">Smoke Forecasts</a></li>
+                  <li><a href="/smartfire/">SmartFire</a></li>
+                  <li><a href="/playground">Playground</a></li>
+                  <li><a href="/data">Data</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" aria-expanded="false" role="button" data-toggle="dropdown" href="#">
+                  Resources <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="/national-forum">National Forum</a></li>
+                  <li><a href="/resources">Resource Directory</a></li>
+                  <li><a href="/faq">FAQ</a></li>
+                </ul>
+              </li>
+              <li class="">
+                <a href="/contact">Contact</a></li>
+            </ul>
+            <!--
+            <form class="navbar-form navbar-right" role="form">
+              <div class="form-group">
+                <input type="text" placeholder="Email" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="password" placeholder="Password" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-success">Sign in</button>
+            </form>
+            -->
+          </div> <!-- navbar-collapse -->
+        </div> <!-- container -->
+      </div> <!-- navbar -->
+  
+
+    <div class="container" role="main" style="margin:50px">
+      <div class="page-header">
+        <h1>BlueSky Verification - Methodology</h1>
+      </div>
+      <hr>
+      <p>This verification webpage is to be used to compare the 
+          bluesky forecast with observations, as well as to look at some 
+          real-time statistics. There are three main parts to this page,
+           the individual station verification, the statistics, and the model and 
+           observations map. I will go through each section in detail below, 
+           including an explanation of each section and the methodology behind these parts. </p>
+
+      <h2> Verification Map </h2>
+      <p> This page can be very helpful to look at how specific areas of BC are doing with regards 
+          to how good their forecast is (wow awful sentence). The datetime bar at the bottom of the 
+          plot can be scrolled and stop at a specific place. The legend at the right is the forecast- observations. 
+          When it is green it represents a forecast that is doing better than a yellow, which is doing better 
+          than red. (This is obvious). <br>
+        
+        The Model and The model and observations map includes four temporal and spatial windows pairs. 
+        0 hours/0 km looks at just the raw BlueSky model output and observations. The 3 hour/22 km window 
+        looks at the closest values in the BlueSky model to the observed data in a window of plus or minus
+         3 hours and plus or minus 22 km, and so on for the remaining two sets of temporal/spatial window pairs. <br>
+        
+        For these maps, I currently look at four different time and spatial windows pairs. Each pair increases 
+        in time and spatial windows together. 0 hours and 0 km just looks at the raw BlueSky model output and the
+         observations. The 3 hour and 22 km window pair looks at the closest values in the BlueSky model to the 
+         observed data in a window of plus or minus 3 hours and plus or minus 22 km. And so on as the window pairs
+          increase in space and time.  The model and observation map looks at the absolute difference between the
+           forecasted PM2.5 and the observed PM2.5 and displays each station on a map of BC, with green colours 
+           representing a better forecast, and red representing a worse forecast.
+        </p>
+      <h2> Individual Station Verification</h2>
+      <p>The individual station verification displays the raw observations of PM2.5
+        and the BlueSky smoke forecast + background PM2.5 at all stations in 
+        British Columbia. This section of the site is particularly useful if you 
+        are wondering about a specific time, or a particular station. The individual
+         facet plots can be zoomed by selecting a box of interest, each plot will be
+          zoomed to the same time range and range of fine particulate matter. To account 
+          for background PM2.5, 10 μg/m3 is added to the forecast. This value is based 
+          on a previous study of 41 stations in Alberta that Rosie Howard (Howard, 2015)
+           had done, where the mean background PM2.5 was found to range between 5 μg/m3 
+           and 11 μg/m3. This is a pretty cut and dry way of doing it, and it could 
+           potentially use some improvement. The BlueSky forecast that is displayed 
+           on this page is a 9-point grid point average of the raw BlueSky observations. 
+           To calculate the 9-point grid point average, a 3x3 array of padding is 
+           created that surrounds each point in the raw bluesky data. Then the mean of 
+           those 9 points is calculated, this gives the grid point average of BlueSky.  </p>
+      <h2> Verification Statistics</h2>
+      <p>On three plots, the mean absolute  error (MAE) and the root mean squared error (RMSE)
+           for all stations in BC, the accuracy, hit rate, and false alarm rate for all stations 
+           in BC, and the MAE and RMSE for three zones in BC are shown. 
+    </p>
+    <hr>
+      <footer>
+        <p>© BlueSky Canada 2020</p>
+      </footer>
+
+    </div> <!-- main container -->
+
+    <!-- Bootstrap requires jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- Google analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-103958338-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    <!-- end Google Analytics -->
+
+  </body>
+</html>
