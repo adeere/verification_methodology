@@ -3,7 +3,12 @@
 
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+    <style> 
+         table, th, td {
+              border: 1.0px solid black;
+              border-collapse: collapse;
+            }
+            </style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +16,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/static/favicon.ico">
 
-    <title>Forecast Verification - FireSmoke.ca</title>
+    <title>Bluesky Verification - FireSmoke.ca</title>
     <link rel="stylesheet" type="text/css" href="/static/css/verify_bluesky.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
@@ -25,50 +30,41 @@
     <!--<script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script> -->
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <SCRIPT SRC='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></SCRIPT>
+    <SCRIPT>MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}})</SCRIPT> 
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             </head>
     
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">FireSmoke.ca</a>
-          </div> <!-- navbar-header -->
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="">
-                <a href="/">Home</a></li>
-              <li class="dropdown active">
-                <a class="dropdown-toggle" aria-expanded="false" role="button" data-toggle="dropdown" href="#">
-                  Services <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/forecasts">Smoke Forecasts</a></li>
-                  <li><a href="/smartfire/">SmartFire</a></li>
-                  <li><a href="/playground">Playground</a></li>
-                  <li><a href="/data">Data</a></li>
-                </ul>
-              </li>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-image:linear-gradient(rgb(64,64,64), rgb(24,24,24))">
+      <div class="container">
+        <div class="navbar-header" >
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://firesmoke.ca/">FireSmoke.ca</a>
+        </div> <!-- navbar-header -->
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="index.html">Home</a></li>
               <li class="dropdown">
                 <a class="dropdown-toggle" aria-expanded="false" role="button" data-toggle="dropdown" href="#">
-                  Resources <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="/national-forum">National Forum</a></li>
-                  <li><a href="/resources">Resource Directory</a></li>
-                  <li><a href="/faq">FAQ</a></li>
+                  Verification <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="smoke_category.html">Model and Observations Map</a></li>
+                  <li><a href="statistics.html">Statistics</a></li>
+                  <li><a href="interpolation_schemes.html">Individual Station Verification</a></li>
                 </ul>
               </li>
-              <li class="">
-                <a href="/contact">Contact</a></li>
-            </ul>
-            <!--
+
+          </ul>
+          <!--
             <form class="navbar-form navbar-right" role="form">
               <div class="form-group">
                 <input type="text" placeholder="Email" class="form-control">
@@ -97,25 +93,32 @@
            including an explanation of each section and the methodology behind these parts. </p>
 
       <h2> Verification Map </h2>
-      <p> This page can be very helpful to look at how specific areas of BC are doing with regards 
-          to how good their forecast is (wow awful sentence). The datetime bar at the bottom of the 
-          plot can be scrolled and stop at a specific place. The legend at the right is the forecast- observations. 
-          When it is green it represents a forecast that is doing better than a yellow, which is doing better 
-          than red. (This is obvious). <br>
+      <p> This is a map showing the absolute difference between PM2.5 in the BlueSky Canada forecast 
+        and the PM2.5 observed at stations throughout BC. It can be interpreted as how well the smoke 
+        forecast did at observation stations for different windows in time and space, currently in BC.
+        The sliders give users the option to vary the time and spatial windows around the observation
+        points. The scale on the right shows the difference and is split into coloured intervals based
+        on how large the difference is. Red indicates that the difference is larger while green 
+        indicates that the difference is smaller. </p>
+      
+        <p>This difference should be interpreted as a better forecast if the absolute difference is smaller 
+          (green in colour), and a worse forecast if the absolute difference is greater (red in colour). 
+          This page can be helpful to look at how specific areas in BC are going, or specific stations, at
+          particular times during the forecast. The DateTime bar below the map can be scrolled, paused, 
+          and played to look at a specific time or period of time. </p> 
+
         
-        The Model and The model and observations map includes four temporal and spatial windows pairs. 
-        0 hours/0 km looks at just the raw BlueSky model output and observations. The 3 hour/22 km window 
-        looks at the closest values in the BlueSky model to the observed data in a window of plus or minus
-         3 hours and plus or minus 22 km, and so on for the remaining two sets of temporal/spatial window pairs. <br>
-        
-        For these maps, I currently look at four different time and spatial windows pairs. Each pair increases 
-        in time and spatial windows together. 0 hours and 0 km just looks at the raw BlueSky model output and the
-         observations. The 3 hour and 22 km window pair looks at the closest values in the BlueSky model to the 
-         observed data in a window of plus or minus 3 hours and plus or minus 22 km. And so on as the window pairs
-          increase in space and time.  The model and observation map looks at the absolute difference between the
-           forecasted PM2.5 and the observed PM2.5 and displays each station on a map of BC, with green colours 
-           representing a better forecast, and red representing a worse forecast.
-        </p>
+      <p>The time and spatial windows determine the period of time or space that the maps look at. 
+      The spatial and time windows determine the spacing around each of the observation points that
+      we look at to find the closest match. For example, if the time window is plus or minus 5 
+      hours and the spatial window is plus or minus 22 km, to find the closest match to the observations, 
+      we look at 5 hours on either side, and 22 km on either side. So, as the spatial and time 
+      windows increase, the absolute difference is usually smaller, and the forecasts are interpreted
+      as being better. This is useful because for many interpretations of the BlueSky forecast, 
+      it doesn’t matter much where exactly the smoke is located. For cities wondering what their
+      air quality will be, if the smoke is forecasted 5 km away form where it was observed, 
+      it still affects individuals the same.</p>
+
       <h2> Individual Station Verification</h2>
       <p>The individual station verification displays the raw observations of PM2.5
         and the BlueSky smoke forecast + background PM2.5 at all stations in 
@@ -132,11 +135,33 @@
            To calculate the 9-point grid point average, a 3x3 array of padding is 
            created that surrounds each point in the raw bluesky data. Then the mean of 
            those 9 points is calculated, this gives the grid point average of BlueSky.  </p>
+
       <h2> Verification Statistics</h2>
-      <p>On three plots, the mean absolute  error (MAE) and the root mean squared error (RMSE)
-           for all stations in BC, the accuracy, hit rate, and false alarm rate for all stations 
-           in BC, and the MAE and RMSE for three zones in BC are shown. 
-    </p>
+      <p>These statistics are useful to analyze how well the forecast has done on any given day. 
+        There are 5 statistics shown for each day: the mean absolute error, the root mean squared
+         error, the accuracy, the hit rate, and the false alarm rate. </p>
+
+        <p>There are statics for both all of the stations in British Columbia, as well as split 
+          into three zones in British Columbia. The three zones can be seen below: Northern BC, 
+          Interior BC, and Southern BC. </p>
+  
+          <img style="width:40%" src="bc_zones.png">
+          <p>The mean absolute error (MAE) and root mean squared errors
+           (RMSE) are computed with the ‘sklearn.metrics’ (scientific python kit) package in python. 
+           The mean absolute squared error looks at the absolute difference between the forecast 
+           and the observations, this will tell us if the forecast is over or under-performing. 
+           A small MAE suggests that the forecast has done well to predict the observations, and
+            a larger MAE suggests that the forecast did not do a good job predicting the observations. 
+            A MAE of zero would mean that the forecast was perfect in predicting the PM2.5 observations
+             at every point on a given day. The formula used for calculating the MAE is: </p>
+             $$ MAE = \frac{1}{n} \sum |y - \hat{y}| $$
+             <p>The Root-Mean Squared Error is the standard deviation of the residuals (the forecast errors).
+                The RMSE essentially tells you how concentrated the data points are around a line of best fit. 
+                The RMSE is is calculated by swearing the residuals, finding the average of the residuals, and 
+                then taking the square root of that value. Again, the RMSE is calculated with the ‘sklearn.mettics’ 
+                package in python, with the formula below: </p>
+            $$ RMSE = \sqrt \frac{ \sum_{i=1}^n (\hat{y_i} - y_i)^2}{n} $$ 
+            <p>To explain the </p>
     <hr>
       <footer>
         <p>© BlueSky Canada 2020</p>
