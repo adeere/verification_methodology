@@ -3,12 +3,6 @@
 
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <style> 
-         table, th, td {
-              border: 1.0px solid black;
-              border-collapse: collapse;
-            }
-            </style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -84,7 +78,6 @@
       <div class="page-header">
         <h1>BlueSky Verification - Methodology</h1>
       </div>
-      <hr>
       <p>This verification webpage is to be used to compare the 
           bluesky forecast with observations, as well as to look at some 
           real-time statistics. There are three main parts to this page,
@@ -118,6 +111,75 @@
       it doesn’t matter much where exactly the smoke is located. For cities wondering what their
       air quality will be, if the smoke is forecasted 5 km away form where it was observed, 
       it still affects individuals the same.</p>
+      <h2> Verification Statistics</h2>
+      <p>These statistics are useful to analyze how well the forecast has done on any given day. 
+        There are 5 statistics shown for each day: the mean absolute error, the root mean squared
+         error, the accuracy, the hit rate, and the false alarm rate. To account for background smoke, 
+         I set the observations equal to observations - 10 ug/m^3 (observations’ = observations - 10 ug/m^3).
+          Forecast values were left the same (Forecast’ = Forecast). There are statics for both all of the stations 
+          in British Columbia, as well as split into three zones in British Columbia. The three zones can be seen below: 
+          Northern BC, Interior BC, and Southern BC. </p>
+  
+          <img class="img-fluid" style="width:40%; display:block; margin-left: auto; margin-right: auto;" src="bc_zones.png">
+          <p>The mean absolute error (MAE) and root mean squared errors
+           (RMSE) are computed with the ‘sklearn.metrics’ (scientific python kit) package in python. To calculate the MAE and the
+            RMSE, I removed any forecast and observation pairs in which the observation’ is less than 0 (observation’ is defined above). 
+           The mean absolute squared error looks at the absolute difference between the forecast 
+           and the observations, this will tell us if the forecast is over or under-performing. 
+           A small MAE suggests that the forecast has done well to predict the observations, and
+            a larger MAE suggests that the forecast did not do a good job predicting the observations. 
+            A MAE of zero would mean that the forecast was perfect in predicting the PM2.5 observations
+             at every point on a given day. The formula used for calculating the MAE is: </p>
+             $$ MAE = \frac{1}{n} \sum |y - \hat{y}| $$
+             <p> Where n = total number of data points, &Sigma; = the sum of all of the data points, y&#770 = the forecast value,
+               y = the observation values. </p>
+             <p>The Root-Mean Squared Error is the standard deviation of the residuals (the forecast errors).
+                The RMSE essentially tells you how concentrated the data points are around a line of best fit. 
+                The RMSE is is calculated by swearing the residuals, finding the average of the residuals, and 
+                then taking the square root of that value. Again, the RMSE is calculated with the ‘sklearn.mettics’ 
+                package in python, with the formula below: </p>
+            $$ RMSE = \sqrt \frac{ \sum_{i=1}^n (\hat{y_i} - y_i)^2}{n} $$ 
+            <p>To explain the method behind the hit rate, false alarm rate, correct negatives, and misses, I will present
+              the following table: 
+            </p>
+
+            <table style="float:center; margin-left:auto; margin-right:auto; width: 80%" class="table table-bordered table-striped">
+               <th rowspan="2" colspan="2">Contingency Table</th>
+               <th colspan="2">Observations' > 0 </th>
+              </tr>
+              <tr>
+               <td>Yes</td>
+               <td>No</td>
+              </tr>
+              <tr>
+               <th rowspan="2">Forecast' > 0</th>
+               <td>Yes</td>
+               <td>Hits </td>
+               <td>False Alarms</td>
+              </tr>
+              <tr>
+               <td>No</td>
+               <td> Misses</td>
+               <td>Correct Negatives</td>
+              </tr>
+             </table>
+
+         <p> The three statistics that are showed on the page can be defined as:   
+           <ul>
+             <li> Accuracy =  [(hits + correct negatives)/total] </li>
+              <ul>
+                <li> This tells us the fraction of forecasts that were correct overall</li>
+              </ul>
+              <li> Hit Rate =  [hits/(hits + misses)] </li>
+              <ul>
+                <li> This tells us the fraction of observed "yes" events that were correctly forecast by location</li>
+              </ul>
+              <li> False Alarm Rate =  [false alarms/(hits + false alarms)] </li>
+              <ul>
+                <li> This tells us the fraction of "yes" forecast results that were forecast when there was no smoke observed. </li>
+              </ul>
+           </ul></p>
+    <p> A higher accuracy, a higher hit rate, and a lower false alarm rate mean that the forecast is performing better.</p>
 
       <h2> Individual Station Verification</h2>
       <p>The individual station verification displays the raw observations of PM2.5
@@ -136,32 +198,8 @@
            created that surrounds each point in the raw bluesky data. Then the mean of 
            those 9 points is calculated, this gives the grid point average of BlueSky.  </p>
 
-      <h2> Verification Statistics</h2>
-      <p>These statistics are useful to analyze how well the forecast has done on any given day. 
-        There are 5 statistics shown for each day: the mean absolute error, the root mean squared
-         error, the accuracy, the hit rate, and the false alarm rate. </p>
 
-        <p>There are statics for both all of the stations in British Columbia, as well as split 
-          into three zones in British Columbia. The three zones can be seen below: Northern BC, 
-          Interior BC, and Southern BC. </p>
-  
-          <img style="width:40%" src="bc_zones.png">
-          <p>The mean absolute error (MAE) and root mean squared errors
-           (RMSE) are computed with the ‘sklearn.metrics’ (scientific python kit) package in python. 
-           The mean absolute squared error looks at the absolute difference between the forecast 
-           and the observations, this will tell us if the forecast is over or under-performing. 
-           A small MAE suggests that the forecast has done well to predict the observations, and
-            a larger MAE suggests that the forecast did not do a good job predicting the observations. 
-            A MAE of zero would mean that the forecast was perfect in predicting the PM2.5 observations
-             at every point on a given day. The formula used for calculating the MAE is: </p>
-             $$ MAE = \frac{1}{n} \sum |y - \hat{y}| $$
-             <p>The Root-Mean Squared Error is the standard deviation of the residuals (the forecast errors).
-                The RMSE essentially tells you how concentrated the data points are around a line of best fit. 
-                The RMSE is is calculated by swearing the residuals, finding the average of the residuals, and 
-                then taking the square root of that value. Again, the RMSE is calculated with the ‘sklearn.mettics’ 
-                package in python, with the formula below: </p>
-            $$ RMSE = \sqrt \frac{ \sum_{i=1}^n (\hat{y_i} - y_i)^2}{n} $$ 
-            <p>To explain the </p>
+             
     <hr>
       <footer>
         <p>© BlueSky Canada 2020</p>
