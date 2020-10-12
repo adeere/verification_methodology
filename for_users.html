@@ -88,11 +88,11 @@
       <h2> Verification Map </h2>
       <p> This is a map showing the absolute difference between PM2.5 in the BlueSky Canada forecast 
         and the PM2.5 observed at stations throughout BC. It can be interpreted as how well the smoke 
-        forecast did at observation stations for different windows in time and space, currently in BC.
-        The sliders give users the option to vary the time and spatial windows around the observation
-        points. The scale on the right shows the difference and is split into coloured intervals based
-        on how large the difference is. Red indicates that the difference is larger while green 
-        indicates that the difference is smaller. </p>
+        forecast did at observation stations for different windows in time and space, currently in BC. 
+        The plots are created with plotly, an interactive graphing tool in python. The sliders give users
+         the option to vary the time and spatial windows around the observation points. The scale on the 
+         right shows the difference and is split into coloured intervals based on how large the difference
+        is. Red indicates that the difference is larger while green indicates that the difference is smaller. </p>
       
         <p>This difference should be interpreted as a better forecast if the absolute difference is smaller 
           (green in colour), and a worse forecast if the absolute difference is greater (red in colour). 
@@ -182,21 +182,18 @@
     <p> A higher accuracy, a higher hit rate, and a lower false alarm rate mean that the forecast is performing better.</p>
 
       <h2> Individual Station Verification</h2>
-      <p>The individual station verification displays the raw observations of PM2.5
-        and the BlueSky smoke forecast + background PM2.5 at all stations in 
-        British Columbia. This section of the site is particularly useful if you 
-        are wondering about a specific time, or a particular station. The individual
-         facet plots can be zoomed by selecting a box of interest, each plot will be
-          zoomed to the same time range and range of fine particulate matter. To account 
-          for background PM2.5, 10 μg/m3 is added to the forecast. This value is based 
-          on a previous study of 41 stations in Alberta that Rosie Howard (Howard, 2015)
-           had done, where the mean background PM2.5 was found to range between 5 μg/m3 
-           and 11 μg/m3. This is a pretty cut and dry way of doing it, and it could 
-           potentially use some improvement. The BlueSky forecast that is displayed 
-           on this page is a 9-point grid point average of the raw BlueSky observations. 
-           To calculate the 9-point grid point average, a 3x3 array of padding is 
-           created that surrounds each point in the raw bluesky data. Then the mean of 
-           those 9 points is calculated, this gives the grid point average of BlueSky.  </p>
+      <p>The individual station verification displays the raw observations of PM2.5  and the BlueSky smoke forecast + background 
+        PM2.5 at all stations in British Columbia. To account for background PM2.5, 10 μg/m3 is added to the forecast. This value 
+        is based on a previous study of 41 stations in Alberta that Rosie Howard (Howard, 2015) had done, where the mean background 
+        PM2.5 was found to range between 5 μg/m3 and 11 μg/m3. The observed PM2.5 is taken from recorded values from each station, 
+        available from the BC government air quality website. The BlueSky forecast that is displayed on this page is a 9-point grid
+         point average of the raw BlueSky forecasts. A 3x3 array of padding is created that surrounds each point in the raw BlueSky 
+         data. Then the mean of those 9 points is calculated, this gives the grid point average of BlueSky. </p>
+        <p>This section of the site is particularly useful if you are wondering about a specific time, or a particular station. 
+          The plots are created with plotly, an interactive graphing tool in python. The individual facet plots can be zoomed
+           in by selecting a box of interest, and each plot will be zoomed to the same time range. The facet plots can also be
+            scrolled horizontally and vertically to look at particular stations of interest. 
+        </p>
 
 
              
