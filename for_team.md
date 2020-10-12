@@ -1,5 +1,5 @@
 # **BlueSky Verification - Methodology**
-In the summer of 2020 I was tasked with completing the verificaton of BlueSky Canada forecasts in quasi-realtime that Tim Atkinson had started several months earlier. The three main parts of the site, which I will describe in detail below, are the Verification Map, Verification Statistics, and the Individual Station Traces. At the moment this is only operational for stations in British Columbia, but the hope is to expand that into Alberta and potentially other provinces if there is interest. 
+In the summer of 2020 I was tasked with completing the verification of BlueSky Canada forecasts in quasi-realtime that Tim Atkinson had started several months earlier. The three main parts of the site, which I will describe in detail below, are the Verification Map, Verification Statistics, and the Individual Station Traces. At the moment this is only operational for stations in British Columbia, but the hope is to expand that into Alberta and potentially other provinces if there is interest. 
 
 ### **Individual Station Traces**
 The individual station verification displays the raw observations of PM2.5  and the BlueSky smoke forecast + background PM2.5 at all stations in British Columbia.
@@ -8,7 +8,7 @@ The individual station verification displays the raw observations of PM2.5  and 
 These statistics are useful to analyze how well the forecast has done on any given day. There are 5 statistics shown for each day: the mean absolute error, the root mean squared error, the accuracy, the hit rate, and the false alarm rate.
 
 ### **Verification Map**
-This is a map showing the absolute difference between PM2.5 in the BlueSky Canada forecast and the PM2.5 observed at stations throughout BC. It can be interpreted as how well the smoke forecast did at observation stations for different windows in time and space, currently in BC. 
+There is a map showing the absolute difference between PM2.5 in the BlueSky Canada forecast and the PM2.5 observed at stations throughout BC. It can be interpreted as how well the smoke forecast did at observation stations for different windows in time and space, currently in BC. 
 
 ### **Files** 
 
