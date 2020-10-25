@@ -9,7 +9,7 @@ These statistics are useful to analyze how well the forecast has done on any giv
 
 ## **Individual Station Traces**
 The individual station verification displays the raw observations of PM2.5  and the BlueSky smoke forecast + background PM2.5 at all stations in British Columbia.
-<hr>
+
 
 ## **Example Run from BlueSky2 Command-line** 
 1. cd bluesky/verification
@@ -71,7 +71,6 @@ Step 4. ./`run_verification.sh` runs the bash script which runs the control scri
     * Default is 0 ug/m^3.
     * This value is currently not being used operationally as the background smoke is defined throughout the scripts in different ways. It can be implemented if any individual would like to set a no_smoke_input again.
 
-<hr>
 
 ## **Files** 
 
@@ -147,7 +146,6 @@ There is a more technical description of these scripts (include output from each
 * `index.html`
     * creates webpage for statistics/individual station traces/verification map
 
-<hr>
 
 ## **Output**
 The output of these runs is saved within /bluesky/archive/verification/forecast_id/forecast_start_time. For example, the output for August 20th, 2020 will be saved in /bluesky/archive/verification/BSC00CA12p/2020082008. The output is several html pages containing the different plots (statistics, traces, map) and they get combined into one webpage (index.html). Here is an example: 
