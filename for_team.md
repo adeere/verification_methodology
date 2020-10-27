@@ -1,5 +1,5 @@
 # **BlueSky Verification - Methodology**
-In the summer of 2020 I was tasked with completing the verification of BlueSky Canada forecasts in quasi-real time that Tim Atkinson had started several months earlier. The three main parts of the site, which I will describe in detail below, are the Verification Map, Verification Statistics, and the Individual Station Traces. At the moment this is only operational for stations in British Columbia, but the hope is to expand that into Alberta and potentially other provinces if there is interest. 
+In the summer of 2020 I was tasked with completing the verification of BlueSky Canada forecasts in quasi-real time that Tim Atkinson had started several months earlier. The three main parts of the site, which I will describe in detail below, are the Verification Map, Verification Statistics, and the Individual Station Traces. 
 
 ## **Verification Map**
 There is a map showing the absolute difference between PM2.5 in the BlueSky Canada forecast and the PM2.5 observed at stations throughout BC. It can be interpreted as how well the smoke forecast did at observation stations for different windows in time and space, currently in BC. 
@@ -18,6 +18,7 @@ The individual station verification displays the raw observations of PM2.5  and 
 4. ./run_verification.sh 
 
 Step 4. ./`run_verification.sh` runs the bash script which runs the control script with different combinations of time and spatial windows. This is the default that is run operationally. If you are interested in looking at other windows, forecast days, forecast start, etc. you can specify these with the following optional command-line flags: 
+
 ### **Optional Command-Line Flags for run_verification.py**
 
 #### **Used operationally**
@@ -29,8 +30,8 @@ Step 4. ./`run_verification.sh` runs the bash script which runs the control scri
 * —forecast_window
     * Define the length of the forecast that you would like to look at. 
     * Default value is 24 hours
-    * Can be used to look at a different forecast window than default. 
     * It is used in `run_verification.py`.
+    * Can be used to look at a different forecast window than default. 
 * —time_window_input
     * Time window that you would like to look at (in hours).
     * Default value is 5 hours, but several are run operationally and are defined in run_verification.sh
@@ -80,6 +81,7 @@ Here I have included two screenshots of the file structure of /bluesky/verificat
 <img src="bin_files.png" width=50% alt="Screenshot of /bluesky/verification/bin on bluesky2">
 
 There is a more technical description of these scripts (include output from each script and the input each script takes) here: https://docs.google.com/spreadsheets/d/1Lo1qohS7_955KUY1vjYAwYJE6Uu_0KNwLoEtdUQYsyY/edit#gid=0
+
 ### **Bash**  
 * `run_verification.sh`
     * runs `run_verification.py` with combinations of time (hr) and spatial (km) windows
@@ -107,10 +109,11 @@ There is a more technical description of these scripts (include output from each
     * merge data and metadata if necessary 
 * `show_map.py`
     * combines observation data nad bluesky forecast data
-    * the function llpad collects a neighbourhood of data from the model centred around a given station. The size of the neighbourhood is a temporal window of x hours and y km. Then the value closest to the station data is defined as closest, and an array of all of the bluesky model data closest to each station in that temporal window is created. 
+    * the function llpad collects a neighbourhood of data from the model centred around a given station. The size of the neighbourhood is a temporal window of x hours and y km. Then the value closest to the station data is defined as closest, and an array of all of the bluesky model data closest to each station in that temporal window is created. I go into more detail on how the spatial window is calculated below. 
 * `gridpointaverage.py`
     * calculates grid point average interpolation to point to observation stations
     * to be used as bluesky forecast in the individual traces script
+    * I describe the methodology of how the grid point average is calculated below
 * `interpolation_schemes.py`
     * adds grid point average column to the interpolation data dataframe 
         * used in verification map and for calculating statistics
@@ -146,6 +149,18 @@ There is a more technical description of these scripts (include output from each
 * `index.html`
     * creates webpage for statistics/individual station traces/verification map
 
+## **Further Details on Interpolation and Spatial Window**
+**Nine-Point Grid Point Average**
+
+The BlueSky forecast that is displayed on this page is a 9-point grid point average. As shown below, for the grid point average, the nearest neighbour to the observation station point is found in the bluesky model data. Then, a 3x3 array of the bluesky model data with point B at the centre is created. The average of these nine points is calculated (the grey shaded box), which gives us the nine-point grid point average.
+
+<img style="width:50%; display:block; margin-left: auto; margin-right: auto;" src="grid_point_average.png" width=55% alt="Description of the Grid Point Average Calculation">
+
+**Spatial Window for the Verification Map**
+
+The time and spatial windows determine the period of time and space that the maps look at. The spatial and time windows are input to a padding function. This function collects a neighbourhood of data from the model centred around a given station. The values in the spatial data frame for the maps are illustrated in the grid below for a spatial window of 0.2°. The nearest neighbour to the observation point at the station (Point A) is used as the centre of a grid that grows with the spatial window. Then, from this 2-d spatial array, the model value closest to the observation value is found.
+
+<img src="spatial_window.png" style="width:50%; display:block; margin-left: auto; margin-right: auto;" width=55% alt="Description of the Spatial Window Calculation">
 
 ## **Output**
 The output of these runs is saved within /bluesky/archive/verification/forecast_id/forecast_start_time. For example, the output for August 20th, 2020 will be saved in /bluesky/archive/verification/BSC00CA12p/2020082008. The output is several html pages containing the different plots (statistics, traces, map) and they get combined into one webpage (index.html). Here is an example: 
